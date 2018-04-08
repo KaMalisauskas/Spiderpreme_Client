@@ -1,0 +1,39 @@
+.login-form {
+    max-width: 200px;
+    max-height: 30px;
+}
+.login-form-forgot {
+    float: right;
+}
+.login-form-button {
+    width: 50%;
+}
+
+.ant-form-item {
+    margin-bottom: 1px !important;
+}
+
+.ant-form-item-control {
+    text-align: center;
+}
+
+.ant-input-affix-wrapper {
+    width: 97% !important;
+}
+
+.widget-page {
+    max-width: 250px;
+    margin-top: 15px;
+
+}
+
+.widget-page h3 {
+    text-align: center;
+}
+.buttonRight {
+    margin-left: 80px;
+}
+
+.ant-form.ant-form-horizontal.login-form {
+    margin-left: 20px;
+}
