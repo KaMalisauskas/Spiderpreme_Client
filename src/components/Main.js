@@ -14,6 +14,7 @@ class Main extends Component {
 
 
     render() {
+        console.log(this.props.location.state)
         return(
             <div className='widget-page'>
                 <h2>Your current Lookout  🔍!</h2>

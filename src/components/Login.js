@@ -23,9 +23,17 @@ class Login extends Component {
                         username: values.userName,
                         password: values.password
                     });
+
                     this.setState({loading: false})
                     Auth.AUTHENTICATE(RES.data.data.token);
-                    this.props.history.push('/');
+
+                    const OBJ = {
+                        email: RES.data.data.email,
+                        username: RES.data.data.username
+                    }
+
+                    this.props.history.push('/', OBJ);
+
                 } catch(err) {
                     console.log(err)
                     alert('Incorrect username or password')
@@ -39,27 +47,33 @@ class Login extends Component {
     render() {
         const { getFieldDecorator } = this.props.form;
         return (
-            <Form onSubmit={this.handleSubmit} className="login-form">
-                <FormItem>
-                    {getFieldDecorator('userName', {
-                        rules: [{ required: true, message: 'Please input your username!' }],
-                    })(
-                        <Input size="small" prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
-                    )}
-                </FormItem>
-                <FormItem>
-                    {getFieldDecorator('password', {
-                        rules: [{ required: true, message: 'Please input your Password!' }],
-                    })(
-                        <Input size="small" prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
-                    )}
-                </FormItem>
-                <FormItem>
-                    <Button loading={this.state.loading} size="small" type="primary" htmlType="submit" className="login-form-button">
-                        Log in
-                    </Button>
-                </FormItem>
-            </Form>
+            <div className='widget-page'>
+                <h3>Welcome to Spiderpreme 🕷</h3>
+                <Form onSubmit={this.handleSubmit} className="login-form">
+
+                    <FormItem>
+                        {getFieldDecorator('userName', {
+                            rules: [{ required: true, message: 'Please input your username!' }],
+                        })(
+                            <Input size="small" prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
+                        )}
+                    </FormItem>
+                    <FormItem>
+                        {getFieldDecorator('password', {
+                            rules: [{ required: true, message: 'Please input your Password!' }],
+                        })(
+                            <Input size="small" prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
+                        )}
+                    </FormItem>
+
+                    <FormItem>
+                        <Button loading={this.state.loading} size="small" type="primary" htmlType="submit" className="login-form-button">
+                            Log in
+                        </Button>
+                    </FormItem>
+
+                </Form>
+            </div>
         );
     }
 }
