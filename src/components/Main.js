@@ -12,9 +12,15 @@ class Main extends Component {
         console.log('delete')
     }
 
+    componentDidMount() {
+        if(!this.props.req.length) {
+            console.log('s')
+            this.props.history.push('/reqForm')
+        }
+    }
 
     render() {
-        console.log(this.props.location.state)
+        console.log(this.props)
         return(
             <div className='widget-page'>
                 <h2>Your current Lookout  🔍!</h2>

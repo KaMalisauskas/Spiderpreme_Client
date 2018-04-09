@@ -27,8 +27,21 @@
 
 }
 
+.center {
+    text-align: center;
+}
+
 .widget-page h3 {
     text-align: center;
+}
+.widget-page h2 {
+    text-align: center;
+}
+.widget-page p {
+    padding-left: 4px;
+}
+.widget-page a {
+    padding-left: 4px;
 }
 .buttonRight {
     margin-left: 80px;

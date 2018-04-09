@@ -25,14 +25,9 @@ class Login extends Component {
                     });
 
                     this.setState({loading: false})
-                    Auth.AUTHENTICATE(RES.data.data.token);
+                    Auth.AUTHENTICATE(RES.data.data.token, RES.data.data.username);
 
-                    const OBJ = {
-                        email: RES.data.data.email,
-                        username: RES.data.data.username
-                    }
-
-                    this.props.history.push('/', OBJ);
+                    this.props.history.push('/');
 
                 } catch(err) {
                     console.log(err)
