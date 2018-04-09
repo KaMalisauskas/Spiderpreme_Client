@@ -37,6 +37,11 @@
 .widget-page h2 {
     text-align: center;
 }
+.LogoutButton {
+    text-align: right;
+    margin-bottom: -15px;
+    margin-top: -15px;
+}
 .widget-page p {
     padding-left: 4px;
 }

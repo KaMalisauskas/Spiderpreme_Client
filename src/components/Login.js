@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import { Form, Icon, Input, Button } from 'antd';
 import axios from 'axios';
 import * as Auth from '../Modules/Auth';
 import '../App.css';
@@ -11,11 +11,16 @@ class Login extends Component {
     state = {
         loading: false
     };
+
+    componentDidMount() {
+        if(localStorage.getItem('jwtToken')) this.props.history.push('/')
+    }
+
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields( async (err, values) => {
+
             if (!err) {
-                console.log('Received values of form: ', values);
                 this.setState({loading: true})
 
                 try {
@@ -24,14 +29,18 @@ class Login extends Component {
                         password: values.password
                     });
 
-                    this.setState({loading: false})
-                    Auth.AUTHENTICATE(RES.data.data.token, RES.data.data.username);
+                    this.setState({loading: false});
 
-                    this.props.history.push('/');
+                    Auth.AUTHENTICATE(RES.data.data.token, RES.data.data.username, RES.data.data._id);
+
+                    window.location.href = '/reqForm'
 
                 } catch(err) {
+
                     console.log(err)
+
                     alert('Incorrect username or password')
+
                     this.setState({loading: false})
                 }
 
@@ -43,7 +52,8 @@ class Login extends Component {
         const { getFieldDecorator } = this.props.form;
         return (
             <div className='widget-page'>
-                <h3>Welcome to Spiderpreme 🕷</h3>
+                <h3>Welcome to Spiderpreme <span role='img'>🕷</span></h3>
+
                 <Form onSubmit={this.handleSubmit} className="login-form">
 
                     <FormItem>
