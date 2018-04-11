@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, Icon } from 'antd';
 import '../App.css';
 import 'antd/dist/antd.css';
 import axios from 'axios';
-import LogoutButton from './LogoutButton'
+import * as Auth from '../Modules/Auth'
 const FormItem = Form.Item;
 
 
@@ -11,19 +11,10 @@ class ReqForm extends Component {
     state = {
         loading: false,
     };
-    async componentDidMount() {
-        try{
-            const RES = await fetch(`https://spiderpremeclient.herokuapp.com/getRequest/${localStorage.getItem('username')}`)
 
-            const RESJSON = await RES.json()
-
-            if(RESJSON.success) {
-                this.props.history.push('/')
-            }
-
-        } catch (err) {
-            console.error(err)
-        }
+    Logout() {
+        Auth.DEAUTHENTICATE()
+        window.location.reload()
     }
     handleSubmit = (e) => {
         e.preventDefault();
@@ -45,7 +36,7 @@ class ReqForm extends Component {
 
                     this.setState({ loading: false });
 
-                    this.props.history.push('/');
+                    window.location.reload()
 
                 } catch(err) {
 
@@ -64,7 +55,7 @@ class ReqForm extends Component {
         const { getFieldDecorator } = this.props.form;
         return (
             <div className='widget-page'>
-                <LogoutButton />
+                <p className='LogoutButton' onClick={this.Logout}><Icon type="logout" /> Logout</p>
                 <h3>You're logged on!!</h3>
                 <p className='center'>Enter you Requested input to begin!</p>
                 <Form onSubmit={this.handleSubmit} className="login-form">

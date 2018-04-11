@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Button, Icon} from 'antd';
-import LogoutButton from './LogoutButton'
+import * as Auth from '../Modules/Auth'
 
 class Main extends Component {
 
@@ -10,9 +10,14 @@ class Main extends Component {
         loading: true
     }
 
+    Logout() {
+        Auth.DEAUTHENTICATE()
+        window.location.reload()
+    }
+
     async deleteReq() {
         try{
-            await fetch(`https://spiderpremeclient.herokuapp.com/deleteRequest`, {
+            const RES = await fetch(`https://spiderpremeclient.herokuapp.com/deleteRequest`, {
                 method: 'DELETE',
                 body: JSON.stringify({
                     username: localStorage.getItem('username')
@@ -22,7 +27,9 @@ class Main extends Component {
                 },
             })
 
-            this.props.history.push('/reqForm')
+            const RESJSON = await RES.json()
+
+            window.location.reload()
 
         } catch(err) {
 
@@ -64,13 +71,13 @@ class Main extends Component {
     render() {
         return(
             <div className='widget-page'>
-                <LogoutButton />
+                <p className='LogoutButton' onClick={this.Logout}><Icon type="logout" /> Logout</p>
                 <h2>Your current Lookout  🔍!</h2>
                 <h3>Url</h3>
                 <a href={this.state.url}>{this.state.url}</a>
                 <h3>Keyword</h3>
                 <p>{this.state.keyword}</p>
-                <Button className='buttonRight' loading={this.state.loading} type="danger" onClick={this.deleteReq.bind(this)}><Icon type="meh" />Delete</Button>
+                <Button className='buttonRight login-form-button' loading={this.state.loading} type="danger" onClick={this.deleteReq.bind(this)}><Icon type="meh" />Delete</Button>
             </div>
         )
     }

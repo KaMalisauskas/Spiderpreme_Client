@@ -6,7 +6,7 @@ class LogoutButton extends Component {
     render() {
         return (
             <div className='LogoutButton'>
-                <a href='/login' onClick={() => Auth.DEAUTHENTICATE()} >
+                <a href='/' >
                   <p><Icon type="logout" /> Logout</p>
                 </a>
             </div>

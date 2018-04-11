@@ -12,10 +12,6 @@ class Login extends Component {
         loading: false
     };
 
-    componentDidMount() {
-        if(localStorage.getItem('jwtToken')) this.props.history.push('/')
-    }
-
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields( async (err, values) => {
@@ -33,7 +29,7 @@ class Login extends Component {
 
                     Auth.AUTHENTICATE(RES.data.data.token, RES.data.data.username, RES.data.data._id);
 
-                    window.location.href = '/reqForm'
+                    window.location.reload()
 
                 } catch(err) {
 
